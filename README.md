@@ -2,7 +2,7 @@
 
 ### Running the Program
 
-The pose estimation model is made available on [Google Drive](https://github.com/philgatt/Pose-Estimation-Heatmap-Regression) and should be put into the `model` folder. The program allows the usage of the model with the best results described in the Experimental Results section. The user can execute the program from the command line with various options:
+The pose estimation model is made available on [Google Drive](https://drive.google.com/file/d/15b1sRQpKQkC1m28h-v7W3x-rDJBDvf23/view?usp=sharing) and should be put into the `model` folder. The program allows the usage of the model with the best results described in the Experimental Results section. The user can execute the program from the command line with various options:
 
 - `--input <input_type>`: Specifies the type of input to process.
   - `image`: Process a single image.
