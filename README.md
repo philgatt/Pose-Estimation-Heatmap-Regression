@@ -2,7 +2,7 @@
 
 ### Running the Program
 
-Before using the program, the user should clone the corresponding [GitHub repository](https://github.com/philgatt/Pose-Estimation-Heatmap-Regression). The pose estimation model itself is made available on [Google Drive](https://github.com/philgatt/Pose-Estimation-Heatmap-Regression) and should be put into the `model` folder. The program allows the usage of the model with the best results described in the Experimental Results section. The user can execute the program from the command line with various options:
+The pose estimation model is made available on [Google Drive](https://github.com/philgatt/Pose-Estimation-Heatmap-Regression) and should be put into the `model` folder. The program allows the usage of the model with the best results described in the Experimental Results section. The user can execute the program from the command line with various options:
 
 - `--input <input_type>`: Specifies the type of input to process.
   - `image`: Process a single image.
