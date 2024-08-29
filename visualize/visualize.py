@@ -73,28 +73,43 @@ def visualize_coordinates(image, coordinates, visualization_type):
     plt.show()
 
 def visualize_coordinates_video(frames, all_coordinates, visualization_type, output_path, fps):
-    """Visualize coordinates on a video."""
+    # Get dimensions of the video frames
     height, width, _ = frames[0].shape
+    # Define codec and create VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
 
-    fig, ax = plt.subplots()
+    for frame, coordinates in zip(frames, all_coordinates):
+        if isinstance(frame, np.ndarray):
+            image = frame.copy()  # Copy the frame to avoid modifying the original
+        else:
+            raise ValueError("Invalid input: frame must be a numpy array.")
 
-    for frame, coordinates in tqdm.tqdm(zip(frames, all_coordinates), total=len(frames), desc="Processing frames"):
-        ax.clear()
-        image = Image.fromarray(frame)
-        plot_coordinates(ax, image, coordinates, visualization_type)
+        # Filter out None coordinates and maintain indices for connection drawing
+        filtered_coords = [(idx, coord) for idx, coord in enumerate(coordinates) if coord[0] is not None and coord[1] is not None]
 
-        buf = BytesIO()
-        plt.savefig(buf, format='png', bbox_inches='tight', pad_inches=0)
-        buf.seek(0)
-        visualized_frame = np.array(Image.open(buf))
-        buf.close()
+        x_coords = [coord[1][0] for coord in filtered_coords]
+        y_coords = [coord[1][1] for coord in filtered_coords]
+        valid_indices = {coord[0]: idx for idx, coord in enumerate(filtered_coords)}
 
-        visualized_frame = cv2.cvtColor(visualized_frame, cv2.COLOR_RGB2BGR)
-        out.write(visualized_frame)
+        if visualization_type == 'skeleton':
+            for (label1, label2) in connections:
+                idx1, idx2 = label_indices[label1], label_indices[label2]
+                # Check if both indices are in valid_indices to draw connection
+                if idx1 in valid_indices and idx2 in valid_indices:
+                    point1 = (int(x_coords[valid_indices[idx1]]), int(y_coords[valid_indices[idx1]]))
+                    point2 = (int(x_coords[valid_indices[idx2]]), int(y_coords[valid_indices[idx2]]))
+                    cv2.line(image, point1, point2, (0, 0, 255), 7)
 
-    plt.close(fig)
+        for idx, (x, y) in zip(valid_indices.keys(), zip(x_coords, y_coords)):
+            label = labels[idx]
+            color = label_colors_bgr[label]  # Assuming label_colors provides BGR values
+            # Draw points
+            cv2.circle(image, (int(x), int(y)), 15, tuple(color), -1, lineType=cv2.LINE_AA)
+            cv2.circle(image, (int(x), int(y)), 15, (0, 0, 0), 1, lineType=cv2.LINE_AA)
+
+        out.write(image)
+
     out.release()
     print(f"Output video saved to {output_path}")
 
