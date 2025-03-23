@@ -1,7 +1,6 @@
 This repository includes a simple model trained on the [MPII Human Pose dataset] (https://drive.google.com/file/d/15b1sRQpKQkC1m28h-v7W3x-rDJBDvf23/view?usp=sharing).
 
-https://github.com/user-attachments/assets/0722aa7b-9479-4488-9fa6-21e4f165e511
-
+https://github.com/user-attachments/assets/6f5ec9f5-6505-4dc7-8ffb-9063ef747846
 
 The architecture of the convolutional Neural Network looks as follows:
 ![image](https://github.com/user-attachments/assets/4943fb58-64cf-4d56-a6ce-4be5960d8b18)
