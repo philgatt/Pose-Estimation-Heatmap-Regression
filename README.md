@@ -1,4 +1,5 @@
-This repository includes a model trained on the [MPII Human Pose dataset] (https://drive.google.com/file/d/15b1sRQpKQkC1m28h-v7W3x-rDJBDvf23/view?usp=sharing).
+# Pose Estimation Heatmap Regression
+A model trained on the [MPII Human Pose dataset] (https://drive.google.com/file/d/15b1sRQpKQkC1m28h-v7W3x-rDJBDvf23/view?usp=sharing).
 
 https://github.com/user-attachments/assets/726025d9-79c8-493b-9f4c-31567dd70614
 
